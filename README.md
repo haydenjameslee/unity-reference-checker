@@ -45,7 +45,7 @@ Here are some example logs:
 | -------- | ----------- | ------------- |
 | Check after compilation   | Runs the `Check All Build Scenes` command every time Unity finishes compiling | false |
 | Log type  | The severity of the log using Unity's LogType (Error, Log, Warning) | Error |
-| Colorful logs  | Adds color to the Unity console logs to highlight important info | false |
+| Colorful logs  | Adds color to the Unity console logs to highlight important info | true |
 
 
 ## TODO
