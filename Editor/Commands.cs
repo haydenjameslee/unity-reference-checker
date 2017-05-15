@@ -20,42 +20,38 @@ namespace RefChecker
 
         public static void CheckBuildScenes() {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-
             string previouslyOpenScenePath = SceneManager.GetActiveScene().path;
 
             EditorBuildSettingsScene[] buildSettingsScenes = EditorBuildSettings.scenes;
             for (int i = 0; i < buildSettingsScenes.Length; i++) {
                 EditorBuildSettingsScene settingsScene = buildSettingsScenes[i];
-
-                string scenePath = settingsScene.path;
-                //Debug.Log("SettingsScene: path=" + scenePath + " enabled=" + settingsScene.enabled);
-
-                EditorSceneManager.OpenScene(scenePath);
-                Scene scene = SceneManager.GetSceneByPath(scenePath);
+                Scene scene = GetSceneFromSettingsScene(settingsScene);
                 CheckScene(scene);
             }
-
             EditorSceneManager.OpenScene(previouslyOpenScenePath);
         }
 
         public static void CheckOpenScene() {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-
             var scene = SceneManager.GetActiveScene();
             CheckScene(scene);
         }
 
-        private static void CheckScene(Scene scene) {
-            //Debug.Log("Checking scene= " + scene.name);
-            var roots = scene.GetRootGameObjects();
+        private static Scene GetSceneFromSettingsScene(EditorBuildSettingsScene settingsScene) {
+            string scenePath = settingsScene.path;
+            EditorSceneManager.OpenScene(scenePath);
+            Scene scene = SceneManager.GetSceneByPath(scenePath);
+            return scene;
+        }
 
+        private static void CheckScene(Scene scene) {
+            GameObject[] roots = scene.GetRootGameObjects();
             for (int i = 0; i < roots.Length; i++) {
                 CheckRootGameObject(roots[i]);
             }
         }
 
         private static void CheckRootGameObject(GameObject go) {
-            //Debug.Log("Checking Root GameObject=" + go.name);
             var components = go.GetComponents<Component>();
             for (int i = 0; i < components.Length; i++) {
                 CheckComponent(components[i]);
