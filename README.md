@@ -1,6 +1,6 @@
 # UnityRefChecker
 
-Have you ever added a reference to a MonoBehaviour in one scene but forgotten to add it in another? UnityRefChecker is for you.
+Have you ever added a reference to a MonoBehaviour in one scene but forgotten to add it in another?
 
 UnityRefChecker is a Unity3D plugin that helps you avoid null references in MonoBehaviours by looking through all MonoBehaviour references in a scene and warning you in Unity's console if a reference has not been assigned.
 
