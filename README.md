@@ -4,6 +4,10 @@ Have you ever added a reference to a MonoBehaviour in one scene but forgotten to
 
 UnityRefChecker is a Unity3D plugin that helps you avoid null references in MonoBehaviours by looking through all MonoBehaviour references in a scene and warning you in Unity's console if a reference has not been assigned.
 
+Fields that cause a log:
+- Unassigned public MonoBehaviour fields that do not have [IgnoreRefChecker] or [HideInInspector]
+- Unassigned private MonoBehaviour fields that do not have [IgnoreRefChecker] and do have [SerializeField]
+
 
 ## Getting Started
 
@@ -44,6 +48,8 @@ UnityRefChecker is a Unity3D plugin that helps you avoid null references in Mono
 
 ## Testing
 
-To test RefChecker create a new Unity project, clone RefChecker and set up a scene as such:
+To test RefChecker create a new Unity project, clone RefChecker and set up a scene like this:
 
 ![Example test scene](http://i.imgur.com/8TxyP84.png "Example test scene structure")
+
+Then open the RefChecker Window and run commands. The RefCheckerTestComponent has the expected results as comments.
