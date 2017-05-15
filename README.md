@@ -40,3 +40,10 @@ UnityRefChecker is a Unity3D plugin that helps you avoid null references in Mono
 ## TODO
 
 - Include prefabs in checks
+
+
+## Testing
+
+To test RefChecker create a new Unity project, clone RefChecker and set up a scene as such:
+
+![Example test scene](http://i.imgur.com/8TxyP84.png "Example test scene structure")
