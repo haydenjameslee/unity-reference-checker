@@ -35,7 +35,7 @@ namespace RefChecker
 
         private static void DrawDocumentationButton() {
             if (GUILayout.Button("Documentation")) {
-                Application.OpenURL("https://github.com/haydenjameslee/refchecker");
+                Application.OpenURL("https://github.com/haydenjameslee/unityrefchecker");
             }
         }
 
