@@ -66,9 +66,13 @@ namespace RefChecker
             }
 
             Type compType = c.GetType();
-            FieldInfo[] fields = compType.GetFields();
+            BindingFlags fieldTypes = BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public;
+            FieldInfo[] fields = compType.GetFields(fieldTypes);
+
             for (int i = 0; i < fields.Length; i++) {
                 FieldInfo info = fields[i];
+
+                //Debug.Log("Field=" + info.Name + " type=" + info.MemberType);
                 bool shouldPrintLog = ShouldPrintLogForComponent(c, info);
 
                 if (shouldPrintLog) {
@@ -79,8 +83,13 @@ namespace RefChecker
 
         private static bool ShouldPrintLogForComponent(Component c, FieldInfo info) {
             object value = info.GetValue(c);
+            bool isAssigned = value != null;
+
             bool hasIgnoreAttribute = FieldHasAttribute(info, typeof(IgnoreRefCheckerAttribute));
-            bool shouldPrintLog = !hasIgnoreAttribute && value == null;
+
+            bool isSerializeable = info.IsPublic || FieldHasAttribute(info, typeof(SerializeField));
+
+            bool shouldPrintLog = !isAssigned && !hasIgnoreAttribute && isSerializeable;
             return shouldPrintLog;
         }
 
