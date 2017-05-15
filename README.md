@@ -9,6 +9,13 @@ Fields that cause a log:
 - Unassigned private MonoBehaviour fields that do not have [IgnoreRefChecker] and do have [SerializeField]
 
 
+## Example
+
+Here are some example logs:
+
+![Example logs](http://i.imgur.com/qMypSw9.png "Example logs")
+
+
 ## Getting Started
 
 1. Open your Unity project
@@ -50,6 +57,6 @@ Fields that cause a log:
 
 To test RefChecker create a new Unity project, clone RefChecker and set up a scene like this:
 
-![Example test scene](http://i.imgur.com/8TxyP84.png "Example test scene structure")
+![Test scene](http://i.imgur.com/8TxyP84.png "Example test scene structure")
 
 Then open the RefChecker Window and run commands. The RefCheckerTestComponent has the expected results as comments.
