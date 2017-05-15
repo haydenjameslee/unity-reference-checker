@@ -88,8 +88,9 @@ namespace RefChecker
             bool hasIgnoreAttribute = FieldHasAttribute(info, typeof(IgnoreRefCheckerAttribute));
 
             bool isSerializeable = info.IsPublic || FieldHasAttribute(info, typeof(SerializeField));
+            bool hiddenInInspector = FieldHasAttribute(info, typeof(HideInInspector));
 
-            bool shouldPrintLog = !isAssigned && !hasIgnoreAttribute && isSerializeable;
+            bool shouldPrintLog = !isAssigned && !hasIgnoreAttribute && isSerializeable && !hiddenInInspector;
             return shouldPrintLog;
         }
 
