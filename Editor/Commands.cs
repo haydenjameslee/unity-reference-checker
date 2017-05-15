@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Text;
+using System.Reflection;
+using RefCheckerExternal;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
@@ -62,8 +63,6 @@ namespace RefChecker
         }
 
         private static void CheckComponent(Component c) {
-            //Debug.Log("Component=" + c.GetType().Name);
-
             // Ignore non-MonoBehaviours like Transform, Camera etc
             bool isBehaviour = c as MonoBehaviour;
             if (!isBehaviour) {
@@ -71,20 +70,29 @@ namespace RefChecker
             }
 
             Type compType = c.GetType();
-            var fields = compType.GetFields();
+            FieldInfo[] fields = compType.GetFields();
             for (int i = 0; i < fields.Length; i++) {
-                var info = fields[i];
-                object value = info.GetValue(c);
+                FieldInfo info = fields[i];
+                bool shouldPrintLog = ShouldPrintLogForComponent(c, info);
 
-                //Debug.Log("Field=" + info.Name + " " + Value=" + value);
-                if (value == null) {
-                    string log = BuildLog(c, info);
-                    Debug.logger.LogFormat(Settings.GetLogSeverity(), log);
+                if (shouldPrintLog) {
+                    BuildAndPrintLog(c, info);
                 }
             }
         }
 
-        private static string BuildLog(Component c, System.Reflection.FieldInfo info) {
+        private static bool ShouldPrintLogForComponent(Component c, FieldInfo info) {
+            object value = info.GetValue(c);
+            bool hasIgnoreAttribute = FieldHasAttribute(info, typeof(IgnoreRefCheckerAttribute));
+            bool shouldPrintLog = !hasIgnoreAttribute && value == null;
+            return shouldPrintLog;
+        }
+
+        private static bool FieldHasAttribute(FieldInfo info, Type attributeType) {
+            return info.GetCustomAttributes(attributeType, true).Length > 0;
+        }
+
+        private static string BuildLog(Component c, FieldInfo info) {
             var log = new ColorfulLogBuilder();
             bool useColor = Settings.GetColorfulLogs();
             log.SetColorful(useColor);
@@ -101,6 +109,11 @@ namespace RefChecker
             log.Append(c.gameObject.name);
             log.EndColor();
             return log.ToString();
+        }
+
+        private static void BuildAndPrintLog(Component c, FieldInfo info) {
+            string log = BuildLog(c, info);
+            Debug.logger.LogFormat(Settings.GetLogSeverity(), log);
         }
     }
 }

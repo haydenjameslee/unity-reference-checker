@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections;
 
 namespace RefChecker
 {
@@ -76,7 +75,7 @@ namespace RefChecker
         }
 
         private void DrawColorfulLogsToggle() {
-            bool toggleValue = EditorGUILayout.Toggle("Print colorful logs", colorfulLogs);
+            bool toggleValue = EditorGUILayout.Toggle("Colorful logs", colorfulLogs);
             if (toggleValue != colorfulLogs) {
                 Settings.SetColorfulLogs(toggleValue);
                 colorfulLogs = toggleValue;
