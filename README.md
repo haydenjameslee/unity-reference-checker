@@ -50,6 +50,7 @@ Here are some example logs:
 
 ## TODO
 
+- Add scene name to error log
 - Include prefabs in checks
 
 
