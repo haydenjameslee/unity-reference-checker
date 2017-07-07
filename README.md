@@ -51,6 +51,7 @@ Here are some example logs:
 ## TODO
 
 - Add scene name to error log
+- Add log saying "all clear" when you click run and there are no errors, don't include for on compile run?
 - Include prefabs in checks
 
 
