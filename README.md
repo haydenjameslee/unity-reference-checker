@@ -50,7 +50,6 @@ Here are some example logs:
 
 ## TODO
 
-- Add log saying "all clear" when you click run and there are no errors, don't include for on compile run?
 - Make video tutorial showing the problem this solves
 - Include prefabs in checks
 - Add to Unity Asset Store
