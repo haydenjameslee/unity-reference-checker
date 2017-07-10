@@ -9,12 +9,17 @@ using UnityEngine.SceneManagement;
 
 namespace UnityRefChecker
 {
-    public class Commands
+    public static class Commands
     {
+        private static bool wasErrorInCheck = false;
+        private static bool runningAfterCompilation = false;
+
         [DidReloadScripts]
         private static void RunAfterCompilation() {
             if (Settings.GetCheckOnCompilation()) {
+                runningAfterCompilation = true;
                 CheckBuildScenes();
+                runningAfterCompilation = false;
             }
         }
 
@@ -29,12 +34,29 @@ namespace UnityRefChecker
                 CheckScene(scene);
             }
             EditorSceneManager.OpenScene(previouslyOpenScenePath);
+
+            if (!wasErrorInCheck && !runningAfterCompilation) {
+                Debug.Log("UnityRefChecker: All good!");
+            }
+            wasErrorInCheck = false;
         }
 
         public static void CheckOpenScene() {
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
             var scene = SceneManager.GetActiveScene();
             CheckScene(scene);
+
+            if (!wasErrorInCheck && !runningAfterCompilation) {
+                Debug.Log("UnityRefChecker: All good!");
+            }
+            wasErrorInCheck = false;
+        }
+
+        public static void ClearConsole() {
+            Assembly assembly = Assembly.GetAssembly(typeof(SceneView));
+            Type logEntries = assembly.GetType("UnityEditorInternal.LogEntries");
+            MethodInfo clearConsoleMethod = logEntries.GetMethod("Clear");
+            clearConsoleMethod.Invoke(new object(), null);
         }
 
         private static Scene GetSceneFromSettingsScene(EditorBuildSettingsScene settingsScene) {
@@ -77,6 +99,10 @@ namespace UnityRefChecker
 
                 if (shouldPrintLog) {
                     BuildAndPrintLog(c, info);
+
+                    if (!wasErrorInCheck) {
+                        wasErrorInCheck = true;
+                    }
                 }
             }
         }

@@ -53,6 +53,7 @@ namespace UnityRefChecker
             DrawLogSeverityPopup();
             DrawColorfulLogsToggle();
             DrawResetSettingsButton();
+            DrawClearConsoleButton();
         }
 
         private void DrawCheckOnCompilationToggle() {
@@ -86,6 +87,12 @@ namespace UnityRefChecker
             if (GUILayout.Button("Reset Settings")) {
                 Settings.ClearSettings();
                 Close();
+            }
+        }
+
+        private void DrawClearConsoleButton() {
+            if (GUILayout.Button("Clear Console")) {
+                Commands.ClearConsole();
             }
         }
     }
