@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace RefCheckerExternal
+namespace UnityRefCheckerExternal
 {
     public class IgnoreRefCheckerAttribute : Attribute
     {

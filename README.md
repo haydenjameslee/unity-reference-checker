@@ -24,7 +24,7 @@ Here are some example logs:
 
 3. Add the `[IgnoreRefChecker]` attribute in front of any members that you wish to keep unassigned
 
-4. In Unity, go to `Window -> RefChecker` to run commands and configure settings
+4. In Unity, go to `Window -> UnityRefChecker` to run commands and configure settings
 
 
 ## Commands 
@@ -36,7 +36,7 @@ Here are some example logs:
 
 ## Attributes
 
-- `IgnoreRefChecker` - Add this attribute to fields that you wish to keep unassigned. RefChecker will not warn you about these fields
+- `IgnoreRefChecker` - Add this attribute to fields that you wish to keep unassigned. UnityRefChecker will not warn you about these fields
 
 
 ## Settings 
@@ -55,8 +55,8 @@ Here are some example logs:
 
 ## Testing
 
-To test RefChecker create a new Unity project, clone RefChecker and set up a scene like this:
+To test UnityRefChecker create a new Unity project, clone UnityRefChecker and set up a scene like this:
 
 ![Test scene](http://i.imgur.com/8TxyP84.png "Example test scene structure")
 
-Then open the RefChecker Window and run commands. The RefCheckerTestComponent has the expected results as comments.
+Then open the UnityRefChecker Window and run commands. The RefCheckerTestComponent has the expected results as comments.

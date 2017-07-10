@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using RefCheckerExternal;
+using UnityRefCheckerExternal;
 
 public class RefCheckerTestComponent : MonoBehaviour
 {

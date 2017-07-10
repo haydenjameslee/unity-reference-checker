@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Reflection;
-using RefCheckerExternal;
+using UnityRefCheckerExternal;
 using UnityEngine;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
-namespace RefChecker
+namespace UnityRefChecker
 {
     public class Commands
     {
@@ -102,7 +102,7 @@ namespace RefChecker
             var log = new ColorfulLogBuilder();
             bool useColor = Settings.GetColorfulLogs();
             log.SetColorful(useColor);
-            log.Append("RefChecker: Component ");
+            log.Append("UnityRefChecker: Component ");
             log.StartColor();
             log.Append(c.GetType().Name);
             log.EndColor();
@@ -113,6 +113,10 @@ namespace RefChecker
             log.Append(" on GameObject ");
             log.StartColor();
             log.Append(c.gameObject.name);
+            log.EndColor();
+            log.Append(" in Scene ");
+            log.StartColor();
+            log.Append(c.gameObject.scene.name);
             log.EndColor();
             return log.ToString();
         }

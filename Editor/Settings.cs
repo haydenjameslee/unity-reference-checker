@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace RefChecker
+namespace UnityRefChecker
 {
     public class Settings
     {

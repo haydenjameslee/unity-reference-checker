@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace RefChecker
+namespace UnityRefChecker
 {
     public class ColorfulLogBuilder
     {

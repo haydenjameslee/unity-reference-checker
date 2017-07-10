@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-namespace RefChecker
+namespace UnityRefChecker
 {
     public class SettingsWindow : EditorWindow
     {
@@ -11,7 +11,7 @@ namespace RefChecker
 
         private const string checkAfterCompilationInfo = "Checks all build scenes whenever Unity finishes compiling.";
 
-        [MenuItem("Window/RefChecker")]
+        [MenuItem("Window/UnityRefChecker")]
         public static void ShowWindow() {
             GetWindow(typeof(SettingsWindow));
         }
@@ -23,7 +23,7 @@ namespace RefChecker
         }
 
         private void OnGUI() {
-            GUILayout.Label("RefChecker", EditorStyles.boldLabel);
+            GUILayout.Label("UnityRefChecker", EditorStyles.boldLabel);
             DrawDocumentationButton();
 
             GUILayout.Label("Commands", EditorStyles.boldLabel);
@@ -52,7 +52,7 @@ namespace RefChecker
             DrawCheckOnCompilationToggle();
             DrawLogSeverityPopup();
             DrawColorfulLogsToggle();
-            DrawClearSettingsButton();
+            DrawResetSettingsButton();
         }
 
         private void DrawCheckOnCompilationToggle() {
@@ -82,8 +82,8 @@ namespace RefChecker
             }
         }
 
-        private void DrawClearSettingsButton() {
-            if (GUILayout.Button("Clear Settings")) {
+        private void DrawResetSettingsButton() {
+            if (GUILayout.Button("Reset Settings")) {
                 Settings.ClearSettings();
                 Close();
             }
